@@ -306,7 +306,7 @@ public final class Analyser {
                     break;//疑问
             }
         }
-        throw new Error("Not implemented");
+        //throw new Error("Not implemented");
     }
 
     private int analyseConstantExpression() throws CompileError {
