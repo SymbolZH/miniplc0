@@ -2,10 +2,26 @@ package miniplc0java.tokenizer;
 
 import miniplc0java.error.TokenizeError;
 import miniplc0java.error.ErrorCode;
+import miniplc0java.util.Pos;
+
+import static miniplc0java.tokenizer.TokenType.*;
 
 public class Tokenizer {
 
     private StringIter it;
+    private String keyWord[] = {"BEGIN","END","VAR","CONST","PRINT"};
+    private TokenType keyWordOut[]={Begin,End,Var,Const,Print};
+    private TokenType is_keyword(String str){
+        for(int i = 0;i < keyWord.length;i++)
+        {
+            if(keyWord[i].equals(str)) {
+                //System.out.println(keyWordOut[i]);
+                return keyWordOut[i];
+            }
+        }
+        return null;
+    }
+
 
     public Tokenizer(StringIter it) {
         this.it = it;
@@ -30,15 +46,29 @@ public class Tokenizer {
 
         char peek = it.peekChar();
         if (Character.isDigit(peek)) {
-            return lexUInt();
+            return lexUInt();//是数字的情况下
         } else if (Character.isAlphabetic(peek)) {
-            return lexIdentOrKeyword();
+            return lexIdentOrKeyword();//是字母的情况下
         } else {
             return lexOperatorOrUnknown();
         }
     }
 
     private Token lexUInt() throws TokenizeError {
+        it.ptrNext = it.nextPos();
+        Pos start_pos=it.ptr;
+        char tmp_char=it.nextChar();
+        String tmp_arr="";
+        while(Character.isDigit(tmp_char)){
+            tmp_arr+=tmp_char;
+            it.ptrNext=it.nextPos();
+            tmp_char=it.nextChar();
+        }
+        it.ptr=it.previousPos();
+        it.ptrNext=it.nextPos();
+        Pos end_pos=it.ptr;
+        int value=Integer.parseInt(tmp_arr);
+        return new Token(Uint, value, start_pos, end_pos);
         // 请填空：
         // 直到查看下一个字符不是数字为止:
         // -- 前进一个字符，并存储这个字符
@@ -47,10 +77,35 @@ public class Tokenizer {
         // 解析成功则返回无符号整数类型的token，否则返回编译错误
         //
         // Token 的 Value 应填写数字的值
-        throw new Error("Not implemented");
+
+
+        //throw new Error("Not implemented");
     }
 
     private Token lexIdentOrKeyword() throws TokenizeError {
+
+
+        it.ptrNext = it.nextPos();
+        Pos start_pos=it.ptr;
+        char tmp_char=it.nextChar();
+        String tmp_arr="";
+
+
+        while(Character.isDigit(tmp_char)||Character.isAlphabetic(tmp_char)){
+            tmp_arr+=tmp_char;
+            it.ptrNext=it.nextPos();
+            tmp_char=it.nextChar();
+        }
+
+        it.ptr=it.previousPos();
+        it.ptrNext=it.nextPos();
+        Pos end_pos=it.ptr;
+        if(is_keyword(tmp_arr)!=null){
+            return new Token(is_keyword(tmp_arr), tmp_arr, start_pos, end_pos);
+        }
+        else{
+            return new Token(Ident,tmp_arr,start_pos,end_pos);
+        }
         // 请填空：
         // 直到查看下一个字符不是数字或字母为止:
         // -- 前进一个字符，并存储这个字符
@@ -60,7 +115,7 @@ public class Tokenizer {
         // -- 否则，返回标识符
         //
         // Token 的 Value 应填写标识符或关键字的字符串
-        throw new Error("Not implemented");
+        //throw new Error("Not implemented");
     }
 
     private Token lexOperatorOrUnknown() throws TokenizeError {
@@ -69,16 +124,18 @@ public class Tokenizer {
                 return new Token(TokenType.Plus, '+', it.previousPos(), it.currentPos());
 
             case '-':
+                return new Token(TokenType.Minus, '+', it.previousPos(), it.currentPos());
                 // 填入返回语句
-                throw new Error("Not implemented");
+                //throw new Error("Not implemented");
 
             case '*':
                 // 填入返回语句
-                throw new Error("Not implemented");
+                return new Token(Mult, '+', it.previousPos(), it.currentPos());
+
 
             case '/':
                 // 填入返回语句
-                throw new Error("Not implemented");
+                return new Token(TokenType.Div, '+', it.previousPos(), it.currentPos());
 
             // 填入更多状态和返回语句
 
