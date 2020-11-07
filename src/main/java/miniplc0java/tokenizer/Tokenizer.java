@@ -55,7 +55,7 @@ public class Tokenizer {
     }
 
     private Token lexUInt() throws TokenizeError {
-        it.ptrNext = it.nextPos();
+        //it.ptrNext = it.nextPos();
         Pos start_pos=it.ptr;
         char tmp_char=it.nextChar();
         String tmp_arr="";
@@ -65,7 +65,7 @@ public class Tokenizer {
             tmp_char=it.nextChar();
         }
         it.ptr=it.previousPos();
-        it.ptrNext=it.nextPos();
+        //it.ptrNext=it.nextPos();
         Pos end_pos=it.ptr;
         int value=Integer.parseInt(tmp_arr);
         return new Token(Uint, value, start_pos, end_pos);
@@ -85,7 +85,7 @@ public class Tokenizer {
     private Token lexIdentOrKeyword() throws TokenizeError {
 
 
-        it.ptrNext = it.nextPos();
+        //it.ptrNext = it.nextPos();
         Pos start_pos=it.ptr;
         char tmp_char=it.nextChar();
         String tmp_arr="";
@@ -98,7 +98,7 @@ public class Tokenizer {
         }
 
         it.ptr=it.previousPos();
-        it.ptrNext=it.nextPos();
+        //it.ptrNext=it.nextPos();
         Pos end_pos=it.ptr;
         if(is_keyword(tmp_arr)!=null){
             return new Token(is_keyword(tmp_arr), tmp_arr, start_pos, end_pos);
