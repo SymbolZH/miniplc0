@@ -285,16 +285,22 @@ public final class Analyser {
             // 如果下一个 token 是……
             var peeked = peek();
             if (peeked.getTokenType() == TokenType.Ident) {
+                next();
                 analyseAssignmentStatement();
+                //疑问？
                 // 调用相应的分析函数
                 // 如果遇到其他非终结符的 FIRST 集呢？
             }
             else if(peeked.getTokenType() == TokenType.Print){
+                next();
                 analyseOutputStatement();
             }
             else {
-                if(peeked.getTokenType() == TokenType.Semicolon)
+                if(peeked.getTokenType() == TokenType.Semicolon){
+                    next();
                     continue;
+                }
+
                 else
                 // 都不是，摸了
                     break;//疑问
@@ -358,7 +364,6 @@ public final class Analyser {
         expect(TokenType.Equal);
         analyseExpression();
         expect(TokenType.Semicolon);
-
 
 
         // 标识符是什么？
@@ -460,9 +465,9 @@ public final class Analyser {
             int value = (int)nameToken.getValue();
             instructions.add(new Instruction(Operation.LIT, value));
         } else if (check(TokenType.LParen)) {
-            var nameToken = expect(TokenType.LParen);
+            expect(TokenType.LParen);
             analyseExpression();
-            nameToken=expect(TokenType.RParen);
+            expect(TokenType.RParen);
             // 是表达式
             // 调用相应的处理函数
         } else {
