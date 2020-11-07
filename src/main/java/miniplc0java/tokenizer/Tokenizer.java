@@ -55,13 +55,13 @@ public class Tokenizer {
     }
 
     private Token lexUInt() throws TokenizeError {
-        //it.ptrNext = it.nextPos();
+        it.ptrNext = it.nextPos();
         Pos start_pos=it.ptr;
         char tmp_char=it.nextChar();
         String tmp_arr="";
         while(Character.isDigit(tmp_char)){
             tmp_arr+=tmp_char;
-            //it.ptrNext=it.nextPos();
+            it.ptrNext=it.nextPos();
             tmp_char=it.nextChar();
         }
         it.ptr=it.previousPos();
@@ -85,7 +85,7 @@ public class Tokenizer {
     private Token lexIdentOrKeyword() throws TokenizeError {
 
 
-        //it.ptrNext = it.nextPos();
+        it.ptrNext = it.nextPos();
         Pos start_pos=it.ptr;
         char tmp_char=it.nextChar();
         String tmp_arr="";
@@ -93,7 +93,7 @@ public class Tokenizer {
 
         while(Character.isDigit(tmp_char)||Character.isAlphabetic(tmp_char)){
             tmp_arr+=tmp_char;
-            //it.ptrNext=it.nextPos();
+            it.ptrNext=it.nextPos();
             tmp_char=it.nextChar();
         }
 
@@ -119,6 +119,7 @@ public class Tokenizer {
     }
 
     private Token lexOperatorOrUnknown() throws TokenizeError {
+        it.ptrNext=it.nextPos();
         switch (it.nextChar()) {
             case '+':
                 return new Token(TokenType.Plus, '+', it.previousPos(), it.currentPos());
@@ -160,6 +161,7 @@ public class Tokenizer {
 
     private void skipSpaceCharacters() {
         while (!it.isEOF() && Character.isWhitespace(it.peekChar())) {
+            it.ptrNext=it.nextPos();
             it.nextChar();
         }
     }
