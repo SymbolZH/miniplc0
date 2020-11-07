@@ -296,14 +296,7 @@ public final class Analyser {
                 analyseOutputStatement();
             }
             else {
-                if(peeked.getTokenType() == TokenType.Semicolon){
-                    next();
-                    continue;
-                }
-
-                else
-                // 都不是，摸了
-                    break;//疑问
+                expect(TokenType.Semicolon);
             }
         }
         //throw new Error("Not implemented");

@@ -15,7 +15,6 @@ public class Tokenizer {
         for(int i = 0;i < keyWord.length;i++)
         {
             if(keyWord[i].equals(str)) {
-                //System.out.println(keyWordOut[i]);
                 return keyWordOut[i];
             }
         }
