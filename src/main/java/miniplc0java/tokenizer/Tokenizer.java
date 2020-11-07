@@ -161,7 +161,7 @@ public class Tokenizer {
     }
 
     private void skipSpaceCharacters() {
-        it.ptrNext=it.nextPos();
+        //it.ptrNext=it.nextPos();
         while (!it.isEOF() && Character.isWhitespace(it.peekChar())) {
             it.ptrNext=it.nextPos();
             it.nextChar();
