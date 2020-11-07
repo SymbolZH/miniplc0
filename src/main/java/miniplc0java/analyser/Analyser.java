@@ -293,8 +293,11 @@ public final class Analyser {
                 analyseOutputStatement();
             }
             else {
+                if(peeked.getTokenType() == TokenType.Semicolon)
+                    continue;
+                else
                 // 都不是，摸了
-                break;
+                    break;//疑问
             }
         }
         throw new Error("Not implemented");
@@ -430,7 +433,7 @@ public final class Analyser {
             // 计算结果需要被 0 减
             instructions.add(new Instruction(Operation.LIT, 0));
         } else {
-            nextIf(TokenType.Plus);
+            //nextIf(TokenType.Plus);
             negate = false;
         }
 
