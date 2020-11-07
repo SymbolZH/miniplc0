@@ -9,7 +9,7 @@ import static miniplc0java.tokenizer.TokenType.*;
 public class Tokenizer {
 
     private StringIter it;
-    private String keyWord[] = {"BEGIN","END","VAR","CONST","PRINT"};
+    private String keyWord[] = {"begin","end","var","const","print"};
     private TokenType keyWordOut[]={Begin,End,Var,Const,Print};
     private TokenType is_keyword(String str){
         for(int i = 0;i < keyWord.length;i++)
