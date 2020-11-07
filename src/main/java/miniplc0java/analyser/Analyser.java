@@ -201,6 +201,9 @@ public final class Analyser {
     }
 
     private void analyseMain() throws CompileError {
+        analyseConstantDeclaration();
+        analyseVariableDeclaration();
+        analyseStatementSequence();
         // 主过程 -> 常量声明 变量声明 语句序列
         throw new Error("Not implemented");
     }
