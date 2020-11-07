@@ -44,7 +44,7 @@ public class Tokenizer {
             return new Token(TokenType.EOF, "", it.currentPos(), it.currentPos());
         }
 
-        it.ptrNext=it.nextPos();
+        //it.ptrNext=it.nextPos();
         char peek = it.peekChar();
         if (Character.isDigit(peek)) {
             return lexUInt();//是数字的情况下
@@ -56,16 +56,16 @@ public class Tokenizer {
     }
 
     private Token lexUInt() throws TokenizeError {
-        it.ptrNext = it.nextPos();
+        //it.ptrNext = it.nextPos();
         Pos start_pos=it.ptr;
         char tmp_char=it.nextChar();
         String tmp_arr="";
         while(Character.isDigit(tmp_char)){
             tmp_arr+=tmp_char;
-            it.ptrNext=it.nextPos();
+            //it.ptrNext=it.nextPos();
             tmp_char=it.nextChar();
         }
-        it.ptr=it.previousPos();
+        //it.ptr=it.previousPos();
         //it.ptrNext=it.nextPos();
         Pos end_pos=it.ptr;
         int value=Integer.parseInt(tmp_arr);
@@ -86,7 +86,7 @@ public class Tokenizer {
     private Token lexIdentOrKeyword() throws TokenizeError {
 
 
-        it.ptrNext = it.nextPos();
+        //it.ptrNext = it.nextPos();
         Pos start_pos=it.ptr;
         char tmp_char=it.nextChar();
         String tmp_arr="";
@@ -94,11 +94,11 @@ public class Tokenizer {
 
         while(Character.isDigit(tmp_char)||Character.isAlphabetic(tmp_char)){
             tmp_arr+=tmp_char;
-            it.ptrNext=it.nextPos();
+            //it.ptrNext=it.nextPos();
             tmp_char=it.nextChar();
         }
 
-        it.ptr=it.previousPos();
+        //it.ptr=it.previousPos();
         //it.ptrNext=it.nextPos();
         Pos end_pos=it.ptr;
         if(is_keyword(tmp_arr)!=null){
@@ -120,7 +120,7 @@ public class Tokenizer {
     }
 
     private Token lexOperatorOrUnknown() throws TokenizeError {
-        it.ptrNext=it.nextPos();
+        //it.ptrNext=it.nextPos();
         switch (it.nextChar()) {
             case '+':
                 return new Token(TokenType.Plus, '+', it.previousPos(), it.currentPos());
@@ -163,9 +163,9 @@ public class Tokenizer {
     private void skipSpaceCharacters() {
         //it.ptrNext=it.nextPos();
         while (!it.isEOF() && Character.isWhitespace(it.peekChar())) {
-            it.ptrNext=it.nextPos();
+            //it.ptrNext=it.nextPos();
             it.nextChar();
-            it.ptrNext=it.nextPos();
+            //it.ptrNext=it.nextPos();
         }
     }
 }
