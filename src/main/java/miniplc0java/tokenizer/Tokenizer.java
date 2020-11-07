@@ -93,7 +93,7 @@ public class Tokenizer {
 
         while(Character.isDigit(tmp_char)||Character.isAlphabetic(tmp_char)){
             tmp_arr+=tmp_char;
-            it.ptrNext=it.nextPos();
+            //it.ptrNext=it.nextPos();
             tmp_char=it.nextChar();
         }
 
@@ -141,16 +141,16 @@ public class Tokenizer {
 
             case '=':
                 // 填入返回语句
-                return new Token(Equal, '/', it.previousPos(), it.currentPos());
+                return new Token(Equal, '=', it.previousPos(), it.currentPos());
             case ';':
                 // 填入返回语句
-                return new Token(Semicolon, '/', it.previousPos(), it.currentPos());
+                return new Token(Semicolon, ';', it.previousPos(), it.currentPos());
             case '(':
                 // 填入返回语句
-                return new Token(LParen, '/', it.previousPos(), it.currentPos());
+                return new Token(LParen, '(', it.previousPos(), it.currentPos());
             case ')':
                 // 填入返回语句
-                return new Token(RParen, '/', it.previousPos(), it.currentPos());
+                return new Token(RParen, ')', it.previousPos(), it.currentPos());
 
             default:
                 // 不认识这个输入，摸了
