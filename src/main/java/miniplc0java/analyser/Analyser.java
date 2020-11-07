@@ -286,8 +286,9 @@ public final class Analyser {
             var peeked = peek();
             if (peeked.getTokenType() == TokenType.Ident) {
                 //next();
+
                 analyseAssignmentStatement();
-                expect(TokenType.Semicolon);
+                //expect(TokenType.Semicolon);
                 //疑问？
                 // 调用相应的分析函数
                 // 如果遇到其他非终结符的 FIRST 集呢？
@@ -295,7 +296,7 @@ public final class Analyser {
             else if(peeked.getTokenType() == TokenType.Print){
                 //next();
                 analyseOutputStatement();
-                expect(TokenType.Semicolon);
+                //expect(TokenType.Semicolon);
             }
             else {
                 expect(TokenType.Semicolon);
