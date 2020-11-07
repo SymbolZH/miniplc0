@@ -58,12 +58,13 @@ public class Tokenizer {
     private Token lexUInt() throws TokenizeError {
         //it.ptrNext = it.nextPos();
         Pos start_pos=it.ptr;
-        char tmp_char=it.nextChar();
+        char tmp_char=it.peekChar();
         String tmp_arr="";
         while(Character.isDigit(tmp_char)){
             tmp_arr+=tmp_char;
+            it.nextChar();
             //it.ptrNext=it.nextPos();
-            tmp_char=it.nextChar();
+            tmp_char=it.peekChar();
         }
         //it.ptr=it.previousPos();
         //it.ptrNext=it.nextPos();
@@ -88,14 +89,15 @@ public class Tokenizer {
 
         //it.ptrNext = it.nextPos();
         Pos start_pos=it.ptr;
-        char tmp_char=it.nextChar();
+        char tmp_char=it.peekChar();
         String tmp_arr="";
 
 
         while(Character.isDigit(tmp_char)||Character.isAlphabetic(tmp_char)){
             tmp_arr+=tmp_char;
+            it.nextChar();
             //it.ptrNext=it.nextPos();
-            tmp_char=it.nextChar();
+            tmp_char=it.peekChar();
         }
 
         //it.ptr=it.previousPos();
