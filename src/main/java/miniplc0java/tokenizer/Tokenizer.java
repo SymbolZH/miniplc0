@@ -61,7 +61,7 @@ public class Tokenizer {
         String tmp_arr="";
         while(Character.isDigit(tmp_char)){
             tmp_arr+=tmp_char;
-            it.ptrNext=it.nextPos();
+            //it.ptrNext=it.nextPos();
             tmp_char=it.nextChar();
         }
         it.ptr=it.previousPos();
