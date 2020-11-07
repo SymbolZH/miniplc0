@@ -285,14 +285,14 @@ public final class Analyser {
             // 如果下一个 token 是……
             var peeked = peek();
             if (peeked.getTokenType() == TokenType.Ident) {
-                next();
+                //next();
                 analyseAssignmentStatement();
                 //疑问？
                 // 调用相应的分析函数
                 // 如果遇到其他非终结符的 FIRST 集呢？
             }
             else if(peeked.getTokenType() == TokenType.Print){
-                next();
+                //next();
                 analyseOutputStatement();
             }
             else {
