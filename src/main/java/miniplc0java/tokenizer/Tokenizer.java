@@ -124,20 +124,33 @@ public class Tokenizer {
                 return new Token(TokenType.Plus, '+', it.previousPos(), it.currentPos());
 
             case '-':
-                return new Token(TokenType.Minus, '+', it.previousPos(), it.currentPos());
+                return new Token(TokenType.Minus, '-', it.previousPos(), it.currentPos());
                 // 填入返回语句
                 //throw new Error("Not implemented");
 
             case '*':
                 // 填入返回语句
-                return new Token(Mult, '+', it.previousPos(), it.currentPos());
+                return new Token(Mult, '*', it.previousPos(), it.currentPos());
 
 
             case '/':
                 // 填入返回语句
-                return new Token(TokenType.Div, '+', it.previousPos(), it.currentPos());
+                return new Token(TokenType.Div, '/', it.previousPos(), it.currentPos());
 
             // 填入更多状态和返回语句
+
+            case '=':
+                // 填入返回语句
+                return new Token(Equal, '/', it.previousPos(), it.currentPos());
+            case ';':
+                // 填入返回语句
+                return new Token(Semicolon, '/', it.previousPos(), it.currentPos());
+            case '(':
+                // 填入返回语句
+                return new Token(LParen, '/', it.previousPos(), it.currentPos());
+            case ')':
+                // 填入返回语句
+                return new Token(RParen, '/', it.previousPos(), it.currentPos());
 
             default:
                 // 不认识这个输入，摸了
