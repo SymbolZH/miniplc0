@@ -299,7 +299,10 @@ public final class Analyser {
                 //expect(TokenType.Semicolon);
             }
             else {
-                expect(TokenType.Semicolon);
+                if(peeked.getTokenType()!=TokenType.End)
+                    expect(TokenType.Semicolon);
+                else
+                    break;
             }
         }
         //throw new Error("Not implemented");
